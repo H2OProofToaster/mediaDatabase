@@ -6,6 +6,6 @@ Media::Media(char titleIn[40], int yearIn, char creatorIn[40])
   , creator{ creatorIn }
 {}
 
-Media::getTitle() const { return title; }
-Media::getYear() const { return year; }
-Media::getCreator() const { return creator; }
+char* Media::getTitle() { return title; }
+int* Media::getYear() { return year; }
+char* Media::getCreator() { return creator; }

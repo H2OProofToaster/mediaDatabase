@@ -1,4 +1,4 @@
-#ifdef MEDIA_H
+#ifndef MEDIA_H
 #define MEDIA_H
 #include <cstring>
 
@@ -12,9 +12,9 @@ class Media
  protected:
   Media(char titleIn[40], int yearIn, char creatorIn[40]);
   
-  char getTitle() const;
-  int getYear() const;
-  char getCreator() const;
+  char* getTitle();
+  int* getYear();
+  char* getCreator();
 };
 
 #endif

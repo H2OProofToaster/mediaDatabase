@@ -1,6 +1,7 @@
-#ifdef VIDEOGAME_H
+#ifndef VIDEOGAME_H
 #define VIDEOGAME_H
 #include "media.h"
+#include <cstring>
 
 class VideoGame : public Media
 {
@@ -10,10 +11,10 @@ class VideoGame : public Media
  public:
   VideoGame(char titleIn[40], int yearIn, char creatorIn[40], int ratingIn);
   
-  char getTitle() const;
-  int getYear() const;
-  char getCreator() const;
-  int getRating() const;
+  char* getTitle();
+  int* getYear();
+  char* getCreator();
+  int* getRating();
 
 };
 
