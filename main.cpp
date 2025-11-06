@@ -5,12 +5,12 @@
 
 int main()
 {
-  char title[40] = "TestName";
+  char title[] = "TestName";
   int year = 2025;
-  char creator[40] = "NickH";
+  char creator[] = "NickH";
   int rating = 5;
   
-  VideoGame* test = new VideoGame(title*, year*, creator*, rating*);
+  VideoGame* test = new VideoGame(title, year, creator, rating);
 
   std::cout << test->getTitle() << test->getYear() << test->getCreator() << test->getRating();
 

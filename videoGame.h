@@ -9,12 +9,12 @@ class VideoGame : public Media
   int rating;
 
  public:
-  VideoGame(char titleIn[40], int yearIn, char creatorIn[40], int ratingIn);
+  VideoGame(char* titleIn, int yearIn, char* creatorIn, int ratingIn);
   
   char* getTitle();
-  int* getYear();
+  int getYear();
   char* getCreator();
-  int* getRating();
+  int getRating();
 
 };
 

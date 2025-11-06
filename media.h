@@ -9,11 +9,11 @@ class Media
   int year;
   char creator[40];
 
- protected:
-  Media(char titleIn[40], int yearIn, char creatorIn[40]);
+ protected: 
+  Media(char* titleIn, int yearIn, char* creatorIn);
   
   char* getTitle();
-  int* getYear();
+  int getYear();
   char* getCreator();
 };
 
