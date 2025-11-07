@@ -15,6 +15,8 @@ class Media
   char* getTitle();
   int getYear();
   char* getCreator();
+
+  ~Media();
 };
 
 #endif

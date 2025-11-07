@@ -11,3 +11,9 @@ Media::Media(char* titleIn, int yearIn, char* creatorIn)
 char* Media::getTitle() { return title; }
 int Media::getYear() { return year; }
 char* Media::getCreator() { return creator; }
+
+Media::~Media()
+{
+  delete title;
+  delete creator;
+}

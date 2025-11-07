@@ -16,6 +16,7 @@ class VideoGame : public Media
   char* getCreator();
   int getRating();
 
+  ~VideoGame();
 };
 
 #endif
