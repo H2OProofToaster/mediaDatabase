@@ -12,11 +12,12 @@ class Media
  protected: 
   Media(char* titleIn, int yearIn, char* creatorIn);
   
+ public:
   char* getTitle();
   int getYear();
   char* getCreator();
-
   ~Media();
+  
 };
 
 #endif
