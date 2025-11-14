@@ -23,63 +23,73 @@ int main()
   bool quit = false;
 
   //Debug
-  int iterations = 0;
-  
-  while(iterations<3)
+  //int iterations = 0;
+
+  //Loops for actions
+  while(!quit)
     {
-      
-      cout << "What is your action? (ADD, SEARCH, DELETE, or QUIT)" << &endl;
+
+      //Get action
+      cout << "What is your action? (ADD, SEARCH, DELETE, or QUIT)" << endl;
       char action[7];
       cin.get(action, 7);
 
+      //ADD selected
       if(strcmp(action, "ADD") == 0)
 	{
+	  //Get media type
 	  int type = 0;
 	  while(type < 1 or type > 3)
 	    {
-	      cout << "What type of media? (1 - Video Game, 2 - Music, 3 - Movie)" << &endl;
+	      cout << "What type of media? (1 - Video Game, 2 - Music, 3 - Movie)" << endl;
 	      cin >> type;
 	    }
+	  //Add it
 	  add(type, mediaList);
 	  type = 0;
 	}
+
+      //SEARCH or DELETE selected
       if(strcmp(action, "SEARCH") == 0 or strcmp(action, "DELETE") == 0)
 	{
+	  //Search method
 	  int type;
 	  while(type < 1 or type > 2)
 	    {
-	      cout << "Search by year or title? (1 - Year, 2 - Title)" << &endl;
+	      cout << "Search by year or title? (1 - Year, 2 - Title)" << endl;
 	      cin >> type;
 	    }
 	  
 	  if(type == 1) //By year
 	    {
 	      int year;
-	      cout << "What year?" << &endl;
+	      cout << "What year?" << endl;
 	      cin >> year;
 
 	      search(year, mediaList);
 
-	      //Debug
-	      quit = true;
-	      
+	      //Rest of delete functionality
 	      if(strcmp(action, "DELETE") == 0)
 		{
 		  int del = -1;
 		  while(del < 0 or del > 1)
 		    {
-		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << &endl;
+		      //Confirm
+		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << endl;
 		      cin >> del;
+		      cin.ignore();
 		    }
+		  //Delete them
 		  if(del == 1) { rem(year, mediaList); }
 		}
 	    }
 	  else if(type == 2)
 	    {
+	      //Same as year but, title (wow)
 	      char title[40];
-	      cout << "What title?" << &endl;
-	      cin.get(title, 40);
+	      cout << "What title?" << endl;
 	      cin.ignore();
+	      cin.get(title, 40);
 	      
 	      search(title, mediaList);
 
@@ -88,8 +98,9 @@ int main()
 		  int del = -1;
 		  while(del < 0 or del > 1)
 		    {
-		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << &endl;
+		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << endl;
 		      cin >> del;
+		      cin.ignore();
 		    }
 		  if(del == 1) { rem(title, mediaList); }
 		}
@@ -99,7 +110,9 @@ int main()
       
       else if(strcmp(action, "QUIT") == 0) { quit = !quit; }
 
-      iterations ++;
+      //Debug
+      //iterations ++;
+
       for(int i = 0; i++; i < strlen(action)) { action[i] = '\0'; }
 
     }
@@ -109,10 +122,11 @@ int main()
 
 void printVect(vector<Media*> vect)
 {
-  for(int i = 0; i < vect.size(); i++)
-    {
-      vect[i]->print();
-    }
+  /*
+    Goes through given vector and uses built in print function
+  */
+  
+  for(int i = 0; i < vect.size(); i++) { vect[i]->print(); }
 }
 
 void add(int type, vector<Media*> &vect)
@@ -127,16 +141,16 @@ void add(int type, vector<Media*> &vect)
   */
   
   char title[40];
-  cout << "What is the title?" << &endl;
+  cout << "What is the title?" << endl;
   cin.ignore();
   cin.get(title, 41);
 
   int year;
-  cout << "What is the year?" << &endl;
+  cout << "What is the year?" << endl;
   cin >> year;
 
   char creator[40];
-  cout << "Who is the creator?" << &endl;
+  cout << "Who is the creator?" << endl;
   cin.ignore();
   cin.get(creator, 41);
 
@@ -144,7 +158,7 @@ void add(int type, vector<Media*> &vect)
     
     //Video Game
     int rating;
-    cout << "What is the rating?" << &endl;
+    cout << "What is the rating?" << endl;
     cin >> rating;
     cin.ignore();
 
@@ -156,15 +170,15 @@ void add(int type, vector<Media*> &vect)
 
     //Music
     int duration;
-    cout << "What is the duration?" << &endl;
+    cout << "What is the duration?" << endl;
     cin >> duration;
     cin.ignore();
-
+    
     char artist[40];
-    cout << "Who is the artist?" << &endl;
-    cin.ignore();
+    cout << "Who is the artist?" << endl;
     cin.get(artist, 41);
-
+    cin.ignore();
+    
     Music* temp = new Music(title, year, creator, duration, artist);
 
     vect.push_back(temp);
@@ -173,12 +187,11 @@ void add(int type, vector<Media*> &vect)
 
     //Movie
     int duration;
-    cout << "What is the duration?" << &endl;
+    cout << "What is the duration?" << endl;
     cin >> duration;
-    cin.ignore();
 
     int rating;
-    cout << "What is the rating?" << &endl;
+    cout << "What is the rating?" << endl;
     cin >> rating;
     cin.ignore();
 
