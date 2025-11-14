@@ -5,9 +5,9 @@
 class Media
 {
  private:
-  char title[40];
+  char* title = new char[40];
   int year;
-  char creator[40];
+  char* creator = new char[40];
 
  protected: 
   Media(char* titleIn, int yearIn, char* creatorIn);
@@ -16,6 +16,9 @@ class Media
   char* getTitle();
   int getYear();
   char* getCreator();
+
+  void virtual print();
+  
   ~Media();
   
 };

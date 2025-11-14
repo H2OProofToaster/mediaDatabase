@@ -7,7 +7,7 @@ class Music : public Media
 {
  private:
   int duration;
-  char artist[40];
+  char* artist = new char[40];
 
  public:
   Music(char* titleIn, int yearIn, char* creatorIn, int durationIn, char* artistIn);
@@ -18,6 +18,8 @@ class Music : public Media
   int getDuration();
   char* getArtist();
 
+  void print() override;
+  
   ~Music();
 };
 

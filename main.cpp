@@ -8,18 +8,24 @@
 
 using namespace std;
 
+void print(vector<Media*> vect);
 void add(int type, vector<Media*> &vect);
-vector<Media*> search(int year, vector<Media*> vect);
-void remove(int year, vector<Media*> vect);
-vector<Media*> search(int title, vector<Media*> vect);
-void remove(int title, vector<Media*> vect);
+//By year
+void search(int year, vector<Media*> vect);
+void rem(int year, vector<Media*> &vect);
+//By title
+void search(char* title, vector<Media*> vect);
+void rem(char* title, vector<Media*> &vect);
 
 int main()
 {
   vector<Media*> mediaList;
   bool quit = false;
 
-  while(!quit)
+  //Debug
+  int iterations = 0;
+  
+  while(iterations<3)
     {
       
       cout << "What is your action? (ADD, SEARCH, DELETE, or QUIT)" << &endl;
@@ -35,6 +41,7 @@ int main()
 	      cin >> type;
 	    }
 	  add(type, mediaList);
+	  type = 0;
 	}
       if(strcmp(action, "SEARCH") == 0 or strcmp(action, "DELETE") == 0)
 	{
@@ -51,9 +58,11 @@ int main()
 	      cout << "What year?" << &endl;
 	      cin >> year;
 
-	      vector<Media*> returnVect = search(year, mediaList);
-	      cout << returnVect;
+	      search(year, mediaList);
 
+	      //Debug
+	      quit = true;
+	      
 	      if(strcmp(action, "DELETE") == 0)
 		{
 		  int del = -1;
@@ -62,7 +71,7 @@ int main()
 		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << &endl;
 		      cin >> del;
 		    }
-		  if(del == 1) { remove(year, mediaList); }
+		  if(del == 1) { rem(year, mediaList); }
 		}
 	    }
 	  else if(type == 2)
@@ -70,9 +79,9 @@ int main()
 	      char title[40];
 	      cout << "What title?" << &endl;
 	      cin.get(title, 40);
-
-	      vector<Media*> returnVect = search(title, mediaList);
-	      cout << returnVect;
+	      cin.ignore();
+	      
+	      search(title, mediaList);
 
 	      if(strcmp(action, "DELETE") == 0)
 		{
@@ -82,12 +91,15 @@ int main()
 		      cout << "Confirm to delete? (1 - Yes, 0 - No)" << &endl;
 		      cin >> del;
 		    }
-		  if(del == 1) {remove(title, mediaList); }
+		  if(del == 1) { rem(title, mediaList); }
 		}
 	    }
+	  type = 0;
 	}
+      
       else if(strcmp(action, "QUIT") == 0) { quit = !quit; }
 
+      iterations ++;
       for(int i = 0; i++; i < strlen(action)) { action[i] = '\0'; }
 
     }
@@ -95,13 +107,15 @@ int main()
   return 0;
 }
 
-void printVect(int type, vector<Media*> vect)
+void printVect(vector<Media*> vect)
 {
   for(int i = 0; i < vect.size(); i++)
     {
-      cout << "
+      vect[i]->print();
+    }
+}
 
-void add(int type, vector<Media*> &vect )
+void add(int type, vector<Media*> &vect)
 {
   /*
     Slightly ripped off from my student list
@@ -120,7 +134,6 @@ void add(int type, vector<Media*> &vect )
   int year;
   cout << "What is the year?" << &endl;
   cin >> year;
-  cin.ignore();
 
   char creator[40];
   cout << "Who is the creator?" << &endl;
@@ -178,7 +191,7 @@ void add(int type, vector<Media*> &vect )
 
 //Year overloads
 
-vector<Media*> search(int year, vector<Media*> vect)
+void search(int year, vector<Media*> vect)
 {
   /*
     Also partially copied from my student list
@@ -186,29 +199,34 @@ vector<Media*> search(int year, vector<Media*> vect)
   */
   
   vector<Media*> returnVect;
-  
+
+  //Find matches
   for(int i = 0; i < vect.size(); i++)
     {
       if(vect[i]->getYear() == year)
 	{
+	  //Keep track of them
 	  returnVect.push_back(vect[i]);
 	}
     }
-
-  return returnVect;
+  //Print matches
+  for(int i = 0; i < returnVect.size(); i++) { returnVect[i]->print(); }
+  cin.ignore();
 }
 
-void remove(int year, vector<Media*> &vect)
+void rem(int year, vector<Media*> &vect)
 {
   /*
     You know the drill
     https://github.com/H2OProofToaster/studentList/blob/main/studentList.cpp
   */
-  
+
+  //Find matches
   for(int i = 0; i < vect.size(); i++)
     {
       if(vect[i]->getYear() == year)
 	{
+	  //Remove them
 	  delete vect[i];
 	  vect.erase(vect.begin() + i);
 	}
@@ -219,7 +237,7 @@ void remove(int year, vector<Media*> &vect)
 
 //Title overloads
 
-vector<Media*> search(char* title, vector<Media*> vect)
+void search(char* title, vector<Media*> vect)
 {
   //See year overloads
 
@@ -233,10 +251,11 @@ vector<Media*> search(char* title, vector<Media*> vect)
         }
     }
 
-  return returnVect;
+  for(int i = 0; i < returnVect.size(); i++) { returnVect[i]->print(); }
+  cin.ignore();
 }
 
-void remove(char* title, vector<Media*> &vect)
+void rem(char* title, vector<Media*> &vect)
 {
   //See year overloads
 

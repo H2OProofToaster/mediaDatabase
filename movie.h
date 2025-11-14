@@ -18,6 +18,8 @@ class Movie : public Media
   int getDuration();
   int getRating();
 
+  void print() override;
+  
   ~Movie();
 };
 
